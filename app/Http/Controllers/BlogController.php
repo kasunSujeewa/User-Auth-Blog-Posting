@@ -59,7 +59,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        
     }
 
     /**
@@ -70,7 +70,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('home.BlogShow',compact('blog'));
     }
 
     /**
@@ -80,9 +80,11 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBlogRequest $request, Blog $blog)
+    public function update(UpdateBlogRequest $request,$id)
     {
-        //
+        $this->blog->modify($request->validated(),$id);
+
+        return redirect('/');
     }
 
     /**

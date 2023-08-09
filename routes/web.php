@@ -45,6 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::resource('/blog','BlogController')->names([
             'index' => 'blog.index', 
             'store' => 'blog.store', 
+            'edit' => 'blog.edit', 
             'update' => 'blog.update', 
             'destroy' => 'blog.delete'
         ]);

@@ -1,6 +1,7 @@
 @extends('layouts.app-master')
 
 @section('content')
+@include('layouts.partials.messages')
     <div class="bg-light p-5 rounded mb-3">
         @auth
         <h1>Blog</h1>
@@ -49,15 +50,19 @@
                   {{$blog->content}} 
               </p>
               @if (auth()->user()->id == $blog->owner->id)
-              <a href="#" class="btn btn-primary">Edit</a>
-              @endif
-              <div class="class-footer">
-                <form method="post" action="{{ route('blog.delete',$blog->id) }}">
-                    @method('DELETE')
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
+              <div class="actions" style="display: flex;
+              justify-content: right;">
+                <a href="{{route('blog.edit',$blog->id)}}" class="btn btn-primary btn-sm" style="margin-right: 2%;">Edit</a>
+                <div class="class-footer">
+                  <form method="post" action="{{ route('blog.delete',$blog->id) }}">
+                      @method('DELETE')
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                  </form>
+                </div>
+
               </div>
+              @endif
             </div>
           </div>
             
@@ -83,8 +88,6 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 
                 <h1 class="h3 mb-3 fw-normal">Add Blog</h1>
-        
-                @include('layouts.partials.messages')
         
                 <div class="form-group form-floating mb-3">
                     <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Title" required="required" autofocus>
